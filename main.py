@@ -1,25 +1,58 @@
+from tabulate import tabulate
+
 from modules.process import Process
 from modules.scheduler.fcfs import FCFS
 from modules.scheduler.ps import PreemptivePS
 
-p1 = Process(4, arrival_time=2, priority=1)
-p2 = Process(1, arrival_time=6, priority=2)
-p3 = Process(7, arrival_time=0, priority=4)
-p4 = Process(5, arrival_time=1, priority=3)
-p5 = Process(6, arrival_time=3, priority=7)
-p6 = Process(2, arrival_time=8, priority=5)
+if __name__ == "__main__":
+    processes = []
 
-l = [p1, p2, p3, p4, p5, p6]
-fcfs = FCFS(l)
-pps = PreemptivePS(l)
+    user_input = True
+    while user_input:
+        print("\nNew process input...")
 
-g1 = pps.gantt_chart()
-g2 = fcfs.gantt_chart()
+        burst_time   = input("\tProcess burst time: ")
+        arrival_time = input("\tProcess arrival time: ")
+        priority     = input("\tProcess priority: ")
 
+        try:
+            burst_time   = int(burst_time)
+            arrival_time = int(arrival_time)
+            priority     = int(priority)
+        except:
+            print("Invalid input...\n")
 
-print("PPS")
-pps.print_gantt_chart(g1)
-print(f"{pps.mean_execution_time(g1)} ms")
-print("FCFS")
-fcfs.print_gantt_chart(g2)
-print(f"{fcfs.mean_execution_time(g2)} ms")
+            continue
+
+        new_process = Process(burst_time, arrival_time, priority)
+
+        processes.append(new_process)
+        print(f"New process [id: {new_process.id}] added successfully.")
+        
+        user_input = input("Keep adding processes? [y/n] ") == "y"
+
+    print("\n" + tabulate(
+        [[process.id, process.burst_time, process.arrival_time, process.priority] for process in processes],
+        headers=["Process", "Arrival Time", "Priority", "Burst Time"]))
+
+    print("\nRunning scheduling algorithms...\n")
+    
+    print("> First Come First Served")
+
+    fcfs = FCFS(processes)
+    gantt = fcfs.gantt_chart()
+
+    print("\tGantt Chart:")
+    fcfs.print_gantt_chart(gantt)
+    print(f"\tMean execution time: {fcfs.mean_execution_time(gantt)} ms\n")
+
+    print("> Preemptive Priority Scheduling")
+
+    pps = PreemptivePS(processes)
+    gantt = pps.gantt_chart()
+
+    print("\tGantt Chart:")
+    pps.print_gantt_chart(gantt)
+    print(f"\tMean execution time: {pps.mean_execution_time(gantt):.2f} ms\n")
+
+    print("Finished scheduling algorithms...")
