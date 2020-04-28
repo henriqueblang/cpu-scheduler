@@ -1,4 +1,4 @@
-from scheduler import Scheduler
+from modules.scheduler.scheduler import Scheduler
 
 class PreemptivePS(Scheduler):
     def gantt_chart(self):

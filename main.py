@@ -1,6 +1,6 @@
-from process import Process
-from fcfs import FCFS
-from ps import PreemptivePS
+from modules.process import Process
+from modules.scheduler.fcfs import FCFS
+from modules.scheduler.ps import PreemptivePS
 
 p1 = Process(4, arrival_time=2, priority=1)
 p2 = Process(1, arrival_time=6, priority=2)

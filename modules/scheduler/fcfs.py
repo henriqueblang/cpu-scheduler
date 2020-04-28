@@ -1,6 +1,6 @@
 import operator
 
-from scheduler import Scheduler
+from modules.scheduler.scheduler import Scheduler
 
 class FCFS(Scheduler):
     def gantt_chart(self):
