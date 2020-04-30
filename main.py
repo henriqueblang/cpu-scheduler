@@ -32,7 +32,7 @@ if __name__ == "__main__":
         user_input = input("Keep adding processes? [y/n] ") == "y"
 
     print("\n" + tabulate(
-        [[process.id, process.burst_time, process.arrival_time, process.priority] for process in processes],
+        [[process.id, process.arrival_time, process.priority, process.burst_time] for process in processes],
         headers=["Process", "Arrival Time", "Priority", "Burst Time"]))
 
     print("\nRunning scheduling algorithms...\n")
