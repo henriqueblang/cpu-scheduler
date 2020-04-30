@@ -29,4 +29,4 @@ class FCFS(Scheduler):
         return gantt
 
     def mean_execution_time(self, gantt):
-        return sum((occurence_time - process_data[0].arrival_time) for occurence_time, process_data in gantt.items()) / len(gantt)
+        return sum((occurence_time - process_data[0].arrival_time) for occurence_time, process_data in gantt.items()) / len(self.processes)
