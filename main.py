@@ -11,14 +11,14 @@ if __name__ == "__main__":
     while user_input:
         print("\nNew process input...")
 
-        burst_time   = input("\tProcess burst time: ")
         arrival_time = input("\tProcess arrival time: ")
         priority     = input("\tProcess priority: ")
+        burst_time   = input("\tProcess burst time: ")
 
         try:
-            burst_time   = int(burst_time)
             arrival_time = int(arrival_time)
             priority     = int(priority)
+            burst_time   = int(burst_time)
         except:
             print("Invalid input...\n")
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     print("\tGantt Chart:")
     fcfs.print_gantt_chart(gantt)
-    print(f"\tMean execution time: {fcfs.mean_execution_time(gantt)} ms\n")
+    print(f"\tMean execution time: {fcfs.mean_execution_time(gantt):.2f} ms\n")
 
     print("> Preemptive Priority Scheduling")
 
